@@ -22,11 +22,14 @@ const isValidObjectId = function(objectId) {
     return mongoose.Types.ObjectId.isValid(objectId)
 }
 
+const isValidPassword= function(password){
+    return /^(?=.*\d)(?=.*[a-zA-Z]).{8,15}$/.test(password)
+}
 
-const phoneValidate = new RegExp(/^([+]\d{2})?\d{10}$/);
+const isValidEmail= function(email){
+    return /[a-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}/.test(email)
+}
 
-//validation for email 
-const emailValidate = new RegExp(/[a-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}/);
 
 module.exports = {
     isValidRequestBody,
@@ -34,6 +37,6 @@ module.exports = {
     isValidImageURL,
     validNumber,
     isValidObjectId,
-    phoneValidate,
-    emailValidate
+    isValidPassword,
+    isValidEmail
 }

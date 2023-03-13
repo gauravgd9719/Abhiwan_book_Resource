@@ -1,10 +1,11 @@
 const authorModel = require("../Model/authorModel");
+const jwt = require("jsonwebtoken")
 const { validator } = require("../utils");
 
 const createAuthor = async function (req, res) {
   let authorData = req.body;
 
-  if (!validator.isValidRequestBody(requestBody)) {
+  if (!validator.isValidRequestBody(authorData)) {
     return res
       .status(400)
       .send({ status: false, message: "Please provide book details" });
@@ -34,7 +35,7 @@ const createAuthor = async function (req, res) {
       .send({ status: false, message: "title should be in Mr/Mrs/Miss" });
   }
 
-  if (!validator.emailValidate.test(email)) {
+  if (!validator.isValidEmail(email)) {
     return res
       .status(400)
       .send({ status: false, message: "enter a valid email" });
@@ -47,7 +48,7 @@ const createAuthor = async function (req, res) {
       .send({ status: false, message: "email is already exits" });
   }
 
-  if (!validator.passValidate.test(password)) {
+  if (!validator.isValidPassword(password)) {
     return res
       .status(400)
       .send({
@@ -87,7 +88,7 @@ const LoginAuthor = async function (req, res) {
       email: email,
       password: password,
     });
-    if (!User) {
+    if (!author) {
       return res
         .status(404)
         .send({ status: false, message: "email/password not found" });
