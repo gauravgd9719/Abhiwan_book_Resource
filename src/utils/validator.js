@@ -23,10 +23,17 @@ const isValidObjectId = function(objectId) {
 }
 
 
+const phoneValidate = new RegExp(/^([+]\d{2})?\d{10}$/);
+
+//validation for email 
+const emailValidate = new RegExp(/[a-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}/);
+
 module.exports = {
     isValidRequestBody,
     isValid,
     isValidImageURL,
     validNumber,
-    isValidObjectId
+    isValidObjectId,
+    phoneValidate,
+    emailValidate
 }
