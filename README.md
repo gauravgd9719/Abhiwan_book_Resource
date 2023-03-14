@@ -16,3 +16,22 @@ Secure all books API using jwt (jsonwebtoken).
     mongoose, 
     nodemon,
     Authetication for secure API
+
+## Models
+
+### Author
+{
+titile : {String, required,enum: ["Mr", "Mrs", "Miss"]},
+name : {string, required},
+email : {string, required},
+password : {strinng, required}
+}
+
+## Books
+{
+name: {string, required, unique},
+imageURL : {string, required},
+author: {objectId, required},
+pages : {Number, required},
+price : {string, required}
+}
