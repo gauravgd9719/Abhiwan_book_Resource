@@ -6,7 +6,7 @@ const route = require("./Routes/route")
 
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://userProject1:WlhZV1CHyTcTiSlZ@blog.osplkog.mongodb.net/abhiwan_Book_Resources")
+mongoose.connect("mongodb+srv://gauravdhiman123:hiFunctionUp@gd-cluster.kufg7lx.mongodb.net/PROJECT_BOOK_RESOURCES")
 .then(()=>console.log("mongoDb is connected"))
 .catch((error)=>console.log(error))
 
