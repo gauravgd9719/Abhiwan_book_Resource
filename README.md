@@ -20,6 +20,7 @@ Secure all books API using jwt (jsonwebtoken).
 ### Models
 
 - Author Model
+```yaml
 {
 titile : {String, required,enum: ["Mr", "Mrs", "Miss"]},
 name : {string, required},
@@ -28,6 +29,7 @@ password : {strinng, required}
 }
 
 - Books Model
+```yaml
 {
 name: {string, required, unique},
 imageURL : {string, required},
