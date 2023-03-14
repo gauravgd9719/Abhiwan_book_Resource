@@ -2,6 +2,13 @@ const authorModel = require("../Model/authorModel");
 const jwt = require("jsonwebtoken")
 const { validator } = require("../utils");
 
+
+/***
+ * 
+ *@CreateAuthor API
+ * 
+ */
+
 const createAuthor = async function (req, res) {
   let authorData = req.body;
 
@@ -69,8 +76,11 @@ const createAuthor = async function (req, res) {
 
 
 /**
- * @LoginAuthor api
+ * 
+ * @LoginAuthor API
+ * 
  */
+
 
 const LoginAuthor = async function (req, res) {
   try {
@@ -88,6 +98,7 @@ const LoginAuthor = async function (req, res) {
       email: email,
       password: password,
     });
+
     if (!author) {
       return res
         .status(404)
@@ -98,11 +109,14 @@ const LoginAuthor = async function (req, res) {
 
     return res
       .status(200)
-      .send({ status: true, message: "Success", data: token });
+      .send({ status: true, message: "Success", TOKEN: token });
+      
   } catch (error) {
     return res.status(500).send({ status: false, message: error.message });
   }
 };
+
+
 
 module.exports = {
   createAuthor,

@@ -2,14 +2,16 @@ const bookModel = require("../Model/bookModel");
 const { validator } = require("../utils");
 
 /**
+ * 
  * @CreateBooks API
+ * 
  */
 
 const createBook = async function (req, res) {
   try {
     let requestBody = req.body;
 
-    let { name, imageURL, author, pages, price } = requestBody;
+    let { name, imageURL, authorId, pages, price } = requestBody;
 
     // Validation Start
 
@@ -19,6 +21,10 @@ const createBook = async function (req, res) {
         .send({ status: false, message: "Please provide book details" });
     }
 
+    if(!validator.isValidObjectId(authorId)){
+      return res.status(400).send({message:"invalid author id "})
+    }
+
     if (!validator.isValid(name)) {
       return res.status(400).send({ message: "book name is required" });
     }
@@ -26,8 +32,8 @@ const createBook = async function (req, res) {
       return res.status(400).send({ message: "imagesURL is required" });
     }
 
-    if (!validator.isValid(author)) {
-      return res.status(400).send({ message: "author is required" });
+    if (!validator.isValid(authorId)) {
+      return res.status(400).send({ message: "authorId is required" });
     }
 
     if (!validator.isValid(pages)) {
@@ -48,13 +54,11 @@ const createBook = async function (req, res) {
       return res.status(400).send({ message: "please enter correct amount" });
     }
 
-    // Name Should Be Unique
     const isNameAlreadyUsed = await bookModel.findOne({ name });
     if (isNameAlreadyUsed) {
       return res.status(400).send({ message: `${name} name is already used` });
     }
 
-    // Validate imageURL
     if (!validator.isValidImageURL(imageURL)) {
       return res
         .status(400)
@@ -69,6 +73,7 @@ const createBook = async function (req, res) {
       message: "Book Successfully create",
       data: createBook,
     });
+
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -79,7 +84,9 @@ const createBook = async function (req, res) {
 
 
 /**
+ * 
  * @ListOfBooks API
+ * 
  */
 
 const getBooks = async function (req, res) {
@@ -101,7 +108,9 @@ const getBooks = async function (req, res) {
 
 
 /**
+ * 
  * @UpdateBook API
+ * 
  */
 
 const updateBook = async function (req, res) {
@@ -131,7 +140,7 @@ const updateBook = async function (req, res) {
       return;
     }
 
-    const { name, author, pages, price } = requestBody;
+    const { name, pages, price } = requestBody;
 
     const isNameAlreadyUsed = await bookModel.findOne({ name });
     if (isNameAlreadyUsed) {
@@ -142,7 +151,7 @@ const updateBook = async function (req, res) {
 
     let updateBook = await bookModel.findOneAndUpdate(
       { _id: bookId },
-      { $set: { name: name, author: author, pages: pages, price: price } },
+      { $set: { name: name, pages: pages, price: price } },
       { new: true }
     );
 
@@ -159,7 +168,9 @@ const updateBook = async function (req, res) {
 
 
 /**
+ * 
  * @deleteBooks API
+ * 
  */
 
 const deleteBooks = async function (req, res) {
