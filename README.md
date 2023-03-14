@@ -27,6 +27,7 @@ name : {string, required},
 email : {string, required},
 password : {strinng, required}
 }
+```
 
 - Books Model
 ```yaml
