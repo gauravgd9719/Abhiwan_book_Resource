@@ -17,9 +17,9 @@ Secure all books API using jwt (jsonwebtoken).
     nodemon,
     Authetication for secure API
 
-## Models
+### Models
 
-### Author
+- Author Model
 {
 titile : {String, required,enum: ["Mr", "Mrs", "Miss"]},
 name : {string, required},
@@ -27,7 +27,7 @@ email : {string, required},
 password : {strinng, required}
 }
 
-## Books
+- Books Model
 {
 name: {string, required, unique},
 imageURL : {string, required},
